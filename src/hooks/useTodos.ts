@@ -15,7 +15,7 @@ export const useTodos = (onError: (message: string) => void) => {
       .catch(() => {
         onError('Unable to load todos');
       });
-  }, []);
+  }, [onError]);
 
   const handleAddTodo = async (title: string, userId: number) => {
     setIsAdding(true);
