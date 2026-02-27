@@ -7,9 +7,10 @@ import { FilterTodo } from './components/FilterTodo';
 import { useTodos } from './hooks/useTodos';
 import { useErrorMessage } from './hooks/useErrorMessage';
 import { filterTodos, FilterType } from './utils/todoFilters';
+import classNames from 'classnames';
 
 export const App: React.FC = () => {
-  const [filter, setFilter] = useState<FilterType>('All');
+  const [filter, setFilter] = useState<FilterType>(FilterType.ALL);
   const [newTodoTitle, setNewTodoTitle] = useState('');
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const {
@@ -109,7 +110,12 @@ export const App: React.FC = () => {
 
       <div
         data-cy="ErrorNotification"
-        className={`notification is-danger is-light has-text-weight-normal ${!errorMessage ? 'hidden' : ''}`}
+        className={classNames(
+          'notification is-danger is-light has-text-weight-normal',
+          {
+            hidden: !errorMessage,
+          },
+        )}
       >
         <button
           data-cy="HideErrorButton"

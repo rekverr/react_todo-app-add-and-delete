@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Todo } from '../types/Todo';
 
 type Props = {
@@ -23,7 +24,9 @@ export const HeaderTodo = ({
       {todos.length > 0 && (
         <button
           type="button"
-          className={`todoapp__toggle-all ${todos.length > 0 && todos.every(todo => todo.completed) ? 'active' : ''}`}
+          className={classNames('todoapp__toggle-all', {
+            active: todos.length > 0 && todos.every(todo => todo.completed),
+          })}
           data-cy="ToggleAllButton"
         />
       )}

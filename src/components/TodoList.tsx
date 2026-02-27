@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import classNames from 'classnames';
 import { Todo } from '../types/Todo';
 
 type Props = {
@@ -20,7 +21,9 @@ export const TodoList = ({
         <div
           data-cy="Todo"
           key={todo.id === 0 ? 'temp-todo' : todo.id}
-          className={`todo ${todo.completed ? 'completed' : ''}`}
+          className={classNames('todo', {
+            completed: todo.completed,
+          })}
         >
           <label className="todo__status-label">
             <input
@@ -39,9 +42,7 @@ export const TodoList = ({
             type="button"
             className="todo__remove"
             data-cy="TodoDelete"
-            onClick={() => {
-              handlerDelete(todo.id);
-            }}
+            onClick={() => handlerDelete(todo.id)}
           >
             ×
           </button>
@@ -50,7 +51,14 @@ export const TodoList = ({
 
           <div
             data-cy="TodoLoader"
-            className={`modal overlay ${!((todo.id === 0 && isAdding) || deletingIds.includes(todo.id)) ? 'is-hidden' : 'is-active'}`}
+            className={classNames('modal overlay', {
+              'is-active':
+                (todo.id === 0 && isAdding) || deletingIds.includes(todo.id),
+              'is-hidden': !(
+                (todo.id === 0 && isAdding) ||
+                deletingIds.includes(todo.id)
+              ),
+            })}
           >
             <div className="modal-background has-background-white-ter" />
             <div className="loader" />

@@ -1,6 +1,10 @@
 import { Todo } from '../types/Todo';
 
-export type FilterType = 'All' | 'Active' | 'Completed';
+export enum FilterType {
+  ALL = 'All',
+  ACTIVE = 'Active',
+  COMPLETED = 'Completed',
+}
 
 export const filterTodos = (
   todos: Todo[],
@@ -9,9 +13,9 @@ export const filterTodos = (
 ): Todo[] => {
   const filtered = (() => {
     switch (filter) {
-      case 'Active':
+      case FilterType.ACTIVE:
         return todos.filter(todo => !todo.completed);
-      case 'Completed':
+      case FilterType.COMPLETED:
         return todos.filter(todo => todo.completed);
       default:
         return todos;

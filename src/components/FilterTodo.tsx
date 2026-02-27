@@ -1,9 +1,11 @@
+import classNames from 'classnames';
 import { Todo } from '../types/Todo';
+import { FilterType } from '../utils/todoFilters';
 
 type Props = {
   todos: Todo[];
-  filter: 'All' | 'Active' | 'Completed';
-  setFilter: (filter: 'All' | 'Active' | 'Completed') => void;
+  filter: FilterType;
+  setFilter: (filter: FilterType) => void;
   handleClearCompleted: () => void;
 };
 
@@ -25,27 +27,33 @@ export const FilterTodo = ({
           <nav className="filter" data-cy="Filter">
             <a
               href="#/"
-              className={`filter__link ${filter === 'All' ? 'selected' : ''}`}
+              className={classNames('filter__link', {
+                selected: filter === FilterType.ALL,
+              })}
               data-cy="FilterLinkAll"
-              onClick={() => setFilter('All')}
+              onClick={() => setFilter(FilterType.ALL)}
             >
               All
             </a>
 
             <a
               href="#/active"
-              className={`filter__link ${filter === 'Active' ? 'selected' : ''}`}
+              className={classNames('filter__link', {
+                selected: filter === FilterType.ACTIVE,
+              })}
               data-cy="FilterLinkActive"
-              onClick={() => setFilter('Active')}
+              onClick={() => setFilter(FilterType.ACTIVE)}
             >
               Active
             </a>
 
             <a
               href="#/completed"
-              className={`filter__link ${filter === 'Completed' ? 'selected' : ''}`}
+              className={classNames('filter__link', {
+                selected: filter === FilterType.COMPLETED,
+              })}
               data-cy="FilterLinkCompleted"
-              onClick={() => setFilter('Completed')}
+              onClick={() => setFilter(FilterType.COMPLETED)}
             >
               Completed
             </a>
